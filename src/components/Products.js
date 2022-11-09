@@ -59,7 +59,7 @@ function Products({searchTerm,setProducts,products}) {
             <Box className="products_home" sx={{ flexGrow: 1 ,mt: "18px"}}>
                 <Grid container spacing={3}>
                     {currentProducts.map((prod) => (
-                        <Grid item xs={4} mb={"22px"}>
+                        <Grid item xs={12} sm={6} md={4} mb={"22px"}>
                                 <SingleProduct prod={prod} key={prod.id} setProducts={setProducts} products={products}/>     
                         </Grid>
 

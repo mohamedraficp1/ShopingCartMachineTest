@@ -24,7 +24,7 @@ function Topbar({searchTerm,setSearchTerm}) {
                         <InputBase sx={{ ml: 2, flex: 1, mr: "-8px", width: "300px", color:"#fff" }} value={searchTerm} onChange={searchHandler} placeholder="Search products" />
                     </Box>
                 </Box>
-                <Box  display={"flex"} justifyContent="space-between" alignItems={"center"} >
+                <Box  display={"flex"} justifyContent="space-between" alignItems={"center"} className="carticon">
                     {/* <Category /> */}
                    <CartIcon />
                 </Box>
