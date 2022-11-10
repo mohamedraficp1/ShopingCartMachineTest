@@ -32,7 +32,7 @@ const AddProductForm = ({setProducts,setOpen}) => {
     description } = addProduct
   const [error, setError] = useState("")
   const [message, setMessage] = useState("")
-
+  const[image, setImage] = useState("")
   const handleAddressChange = (e) => {
     const { name, value } = e.target
     setAddProduct({ ...addProduct, [name]: value })
@@ -57,7 +57,8 @@ const AddProductForm = ({setProducts,setOpen}) => {
           const {data} = await axios.post(`https://dummyjson.com/products/add`, addProduct)
           setLoading(false)
           console.log(data)
-          setProducts((prev)=>([data,...prev ]))
+          const newData = {...data, thumbnail: image}
+          setProducts((prev)=>([newData,...prev ]))
           setOpen(false)
 
     } catch (error) {
@@ -67,6 +68,32 @@ const AddProductForm = ({setProducts,setOpen}) => {
       console.log(error)
     }
   }
+  
+  const handleImages = (e) => {
+   
+    let files= Array.from(e.target.files)
+    files.forEach((img) => {
+      if(img.type !== "image/jpeg" &&
+      img.type !== "image/png" &&
+    img.type !== "image/webp" &&
+    img.type !== "image/gif"){
+        setError(`${img.name} File format is not supported`)
+        // files = files.filter((item)=> item.name !== images.name)
+        return
+      }
+      else if (img.size > 1024 * 1024) {
+        setError(`${img.name} File size is too large`)
+        return
+      }
+        const reader =new FileReader
+        reader.readAsDataURL(img)
+        reader.onload = (readerEvent) => {
+            
+            setImage(readerEvent.target.result)
+        };
+    });
+    
+}
 
   console.log(addProduct)
   return (
@@ -198,6 +225,19 @@ const AddProductForm = ({setProducts,setOpen}) => {
                     onChange={handleAddressChange}
                     helperText={<ErrorMessage name='description' />}
                   />
+                  <Button
+  variant="contained"
+  component="label"
+>
+  Upload File
+  <input
+    type="file"
+    hidden
+    onChange={handleImages}
+  />
+</Button>
+
+
 
                   <Button
                     type="submit"
