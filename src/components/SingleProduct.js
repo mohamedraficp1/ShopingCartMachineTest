@@ -12,7 +12,7 @@ function SingleProduct({ prod, setProducts,products }) {
   src={prod.thumbnail} alt={prod.name} width="350" height="250"  style={{objectFit: "contain"}}
 /> */}<Stack direction={"row"} justifyContent="space-between">
                 <Box>
-                    <Box width={"350px"} height={"250px"} mb="15px" sx={{ backgroundImage: `url(${prod.thumbnail})`, backgroundSize: "cover" }}></Box>
+                    <Box className='productImage' width={"350px"} height={"250px"} mb="15px" sx={{ backgroundImage: `url(${prod.thumbnail})`, backgroundSize: "cover" }}></Box>
                     <Typography variant="h5" fontSize={"15px"} color="error" fontWeight={600} align="left" textTransform={"capitalize"}>  {prod.category}</Typography>
                     <Typography variant="h5" fontSize={"20px"} color="#4D4F5C" fontWeight={500} align="left"> {prod.title}</Typography>
                     <Typography variant="h5" fontSize={"28px"} color="#4D4F5C" fontWeight={600} align="left"> ₹ {prod.price}  &nbsp;

@@ -7,9 +7,13 @@
   pointer-events: none;
 }
 
+.productImage {
+  background-image: url("https://wabisabiproject.com/wp-content/uploads/woocommerce-placeholder.png");
+}
+
 @media screen and (max-width:769px){
   .carticon {
-    display: none !important;
+    display: none !important ;
   }
 }
 

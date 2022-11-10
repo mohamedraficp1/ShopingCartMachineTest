@@ -42,7 +42,7 @@ export default function UpdateProduct({setProducts, id,prod}) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Submit</Button>
+          
         </DialogActions>
       </Dialog>
     </div>

@@ -3,12 +3,12 @@ import axios from 'axios'
 import { Form, Formik, Field, ErrorMessage } from 'formik'
 import React, { useState } from 'react'
 import * as Yup from 'yup'
-
+import PulseLoader from 'react-spinners/PulseLoader'
 // import {useAlert} from 'react-alert'
 
 
 const UpdateProductForm = ({setProducts,setOpen ,id, prod}) => {
-
+  const[loading,setLoading] =useState(false)
   const productInfo = {
     title: prod.title,
     price: prod.price,
@@ -51,12 +51,15 @@ const UpdateProductForm = ({setProducts,setOpen ,id, prod}) => {
   
   const UpdateProductSubmit = async () => {
      try {
+          setLoading(true)
           const {data} = await axios.put(`https://dummyjson.com/products/${id}`, UpdateProduct)
           console.log(data)
+          setLoading(false)
           setProducts((prev)=>([data,...prev ]))
           setOpen(false)
 
     } catch (error) {
+      setLoading(false)
       setMessage("")
       setError(error.response?.data.message)
       console.log(error)
@@ -198,7 +201,7 @@ const UpdateProductForm = ({setProducts,setOpen ,id, prod}) => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}>Submit</Button>
+                    sx={{ mt: 3, mb: 2 }}>{loading ? <PulseLoader color='#fff' size={5}/> : "Submit"}</Button>
                 </Form>
               )
             }

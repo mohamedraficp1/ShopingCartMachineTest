@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {  useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
-
+import PulseLoader from 'react-spinners/PulseLoader'
 // import {useAlert} from 'react-alert'
 
 const productInfo = {
@@ -19,7 +19,7 @@ const productInfo = {
   description: ""
 }
 const AddProductForm = ({setProducts,setOpen}) => {
-
+  const [loading, setLoading]= useState(false)
   // const alert = useAlert()
   const [addProduct, setAddProduct] = useState(productInfo)
   const { title,
@@ -53,12 +53,15 @@ const AddProductForm = ({setProducts,setOpen}) => {
   
   const AddProductSubmit = async () => {
      try {
+          setLoading(true)
           const {data} = await axios.post(`https://dummyjson.com/products/add`, addProduct)
+          setLoading(false)
           console.log(data)
           setProducts((prev)=>([data,...prev ]))
           setOpen(false)
 
     } catch (error) {
+      setLoading(false)
       setMessage("")
       setError(error.response?.data.message)
       console.log(error)
@@ -200,7 +203,7 @@ const AddProductForm = ({setProducts,setOpen}) => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}>Submit</Button>
+                    sx={{ mt: 3, mb: 2 }}>{loading ? <PulseLoader color='#fff' size={5}/> : "Submit"}</Button>
                 </Form>
               )
             }

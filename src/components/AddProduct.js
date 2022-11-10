@@ -14,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AddProduct({setProducts}) {
   const [open, setOpen] = React.useState(false);
-
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -43,7 +43,6 @@ export default function AddProduct({setProducts}) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
